@@ -11,7 +11,7 @@ doc = Nokogiri::HTML(open('http://www.oreilly.com/biocoder/index.csp?submit=true
 search_date = doc.css('meta[name="search_date"]').first.attr(:content)
 
 feed = RSS::Maker.make('atom') do |maker|
-  maker.channel.author = 'Carlo Zottmann <carlo@zottmann.org>'
+  maker.channel.author = 'O\'Reilly Media, Inc.'
   maker.channel.updated = Time.now.to_s
   maker.channel.about = 'http://www.oreilly.com/biocoder/index.csp?submit=true'
   maker.channel.title = 'O\'Reilly BioCoder'

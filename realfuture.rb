@@ -10,7 +10,7 @@ require 'rss'
 doc = Nokogiri::HTML(open('https://tinyletter.com/realfuture/archive'))
 
 feed = RSS::Maker.make('atom') do |maker|
-  maker.channel.author = 'Carlo Zottmann <carlo@zottmann.org>'
+  maker.channel.author = 'Alexis Madrigal'
   maker.channel.updated = Time.now.to_s
   maker.channel.about = 'https://tinyletter.com/realfuture'
   maker.channel.title = 'Alexis Madrigal\'s Real Future'
@@ -30,7 +30,7 @@ feed = RSS::Maker.make('atom') do |maker|
     end
 
     count += 1
-    break if count > 5
+    break if count == 5
   end
 end
 

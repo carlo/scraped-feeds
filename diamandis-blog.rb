@@ -9,23 +9,23 @@ require 'rss'
 
 doc = Nokogiri::HTML(open('http://www.diamandis.com/blog/archive'))
 
+last_entry = doc.css('li.blog-archive-entry')
+last_entry_title = last_entry.css('h4').first.text.strip
+last_entry_url = last_entry.css('a').first.attr('href')
+last_entry_doc = Nokogiri::HTML(open(last_entry_url))
+last_entry_body = last_entry_doc.css('#page-content-body').inner_html
+
 feed = RSS::Maker.make('atom') do |maker|
   maker.channel.author = 'Peter Diamandis'
   maker.channel.updated = Time.now.to_s
   maker.channel.about = 'http://www.diamandis.com/blog/'
   maker.channel.title = 'Peter Diamandis\' Blogs'
 
-  doc.css('li.blog-archive-entry').each do |row|
-    url = row.css('a').first.attr('href')
-    title = row.css('h4').text.strip
-
-    maker.items.new_item do |item|
-      item.link = url
-      item.title = title
-      item.updated = Time.now.to_s
-    end
-
-    break
+  maker.items.new_item do |item|
+    item.link = last_entry_url
+    item.title = last_entry_title
+    item.summary = last_entry_body
+    item.updated = Time.now.to_s
   end
 end
 

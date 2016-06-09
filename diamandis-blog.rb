@@ -18,7 +18,8 @@ last_entry_body = last_entry_doc.css('#page-content-body').inner_html
 feed = RSS::Maker.make('atom') do |maker|
   maker.channel.author = 'Peter Diamandis'
   maker.channel.updated = Time.now.to_s
-  maker.channel.about = 'http://www.diamandis.com/blog/'
+  maker.channel.link = 'http://www.diamandis.com/blog/archive'
+  maker.channel.id = 'http://www.diamandis.com/blog/archive'
   maker.channel.title = 'Peter Diamandis\' Blogs'
 
   maker.items.new_item do |item|
@@ -29,7 +30,7 @@ feed = RSS::Maker.make('atom') do |maker|
   end
 end
 
-fn = File.expand_path('~/c.zottmann.org/feeds/diamandis-blog.atom')
+fn = File.expand_path('~/Google Drive/Sites/czm.io/feeds/diamandis-blog.atom')
 File.open(fn, 'w') do |f|
   f.puts feed
 end

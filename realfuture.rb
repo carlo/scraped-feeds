@@ -12,7 +12,7 @@ doc = Nokogiri::HTML(open('https://tinyletter.com/realfuture/archive'))
 feed = RSS::Maker.make('atom') do |maker|
   maker.channel.author = 'Alexis Madrigal'
   maker.channel.updated = Time.now.to_s
-  maker.channel.about = 'https://tinyletter.com/realfuture'
+  maker.channel.link = maker.channel.id = 'https://tinyletter.com/realfuture'
   maker.channel.title = 'Alexis Madrigal\'s Real Future'
 
   count = 0
@@ -36,7 +36,7 @@ feed = RSS::Maker.make('atom') do |maker|
   end
 end
 
-fn = File.expand_path('~/c.zottmann.org/feeds/realfuture.atom')
+fn = File.expand_path('~/Google Drive/Sites/czm.io/feeds/realfuture.atom')
 File.open(fn, 'w') do |f|
   f.puts feed
 end

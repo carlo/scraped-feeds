@@ -13,7 +13,7 @@ search_date = doc.css('meta[name="search_date"]').first.attr(:content)
 feed = RSS::Maker.make('atom') do |maker|
   maker.channel.author = 'O\'Reilly Media, Inc.'
   maker.channel.updated = Time.now.to_s
-  maker.channel.about = 'http://www.oreilly.com/biocoder/index.csp?submit=true'
+  maker.channel.link = maker.channel.id = 'http://www.oreilly.com/biocoder/'
   maker.channel.title = 'O\'Reilly BioCoder'
 
   row = doc.css('section.archive div.row').first
@@ -36,7 +36,7 @@ feed = RSS::Maker.make('atom') do |maker|
   end
 end
 
-fn = File.expand_path('~/c.zottmann.org/feeds/biocoder.atom')
+fn = File.expand_path('~/Google Drive/Sites/czm.io/feeds/biocoder.atom')
 File.open(fn, 'w') do |f|
   f.puts feed
 end
